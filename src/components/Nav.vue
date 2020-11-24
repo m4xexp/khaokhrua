@@ -78,7 +78,7 @@
         </v-menu>
       </div>
     </v-toolbar>
-
+    
     <v-navigation-drawer v-model="drawer" absolute app temporary>
       <v-list-item>
         <v-list-item-content>

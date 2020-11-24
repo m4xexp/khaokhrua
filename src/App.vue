@@ -1,7 +1,9 @@
 <template>
   <v-app>
-    <Nav />
-    <v-content>
+    <Nav v-if="false"/>
+    <Nav2 v-if="false"/>
+    <v-content style="background-color: grey;">
+      <Test />
       <SearchReceipt />
       <Home />
     </v-content>
@@ -10,15 +12,15 @@
 </template>
 
 <style>
-template v-app v-content {
-  align-content: center;
-}
+
 </style>
 
 <script>
 import Nav from "./components/Nav";
+import Nav2 from "./components/Nav2";
 import Home from "./views/Home";
 import Footer from "./components/Footer";
+// import Test from "./views/Test";
 
 export default {
   name: "App",
@@ -26,7 +28,9 @@ export default {
   components: {
     Home,
     Nav,
+    Nav2,
     Footer,
+    // Test,
   },
 
   data: () => ({
