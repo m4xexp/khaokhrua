@@ -1,17 +1,22 @@
 <template>
   <v-app>
     <Nav v-if="false"/>
-    <Nav2 v-if="false"/>
-    <v-content style="background-color: grey;">
+    <Nav2 v-if="true"/>
+    <v-content style="background-color: #e4e5e5;">
       <Test />
       <SearchReceipt />
-      <Home />
+      <Home v-if="true"/>
     </v-content>
     <Footer />
   </v-app>
 </template>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap');
+
+  *{
+    font-family: 'Kanit', sans-serif;
+  }
 
 </style>
 

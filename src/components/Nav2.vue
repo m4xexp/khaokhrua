@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <!-- Seach Receipt -->
+        <!-- Seach Recipe -->
 
         <div class="search-field">
           <div class="search-text-field-bar">
@@ -50,15 +50,15 @@
 
         <div class="header-nav-menu">
           <div class="nav-menu">
-            <div class="btn-add-receipt">
+            <div class="btn-add-recipe">
               <v-btn left text>
-                <v-icon style="margin-top: 2px">add</v-icon>
+                <v-icon>add</v-icon>
                 <span>เพิ่มสูตรอาหาร</span>
               </v-btn>
             </div>
-            <div class="btn-fav-receipt">
+            <div class="btn-fav-recipe">
               <v-btn left text>
-                <v-icon left style="margin-top: 6px">favorite</v-icon>
+                <v-icon left>favorite</v-icon>
                 <span>เมนูโปรด</span>
               </v-btn>
             </div>
@@ -89,28 +89,32 @@
                           {{ user.email }}
                         </p>
                       </div>
-                      <v-divider class="my-3"></v-divider>
 
-                      <v-btn depressed rounded text href="#">
-                        <v-icon left style="margin-top: 4px"
-                          >account_circle</v-icon
-                        >
-                        <span>แก้ไขโปรไฟล์</span>
-                      </v-btn>
+                      <div class="profile-items">
+                        <v-divider class="my-3"></v-divider>
+                        <v-btn depressed rounded text href="#">
+                          <v-icon left>account_circle</v-icon>
+                          <span style="vertical-align: middle"
+                            >แก้ไขโปรไฟล์</span
+                          >
+                        </v-btn>
 
-                      <v-divider class="my-3"></v-divider>
+                        <v-divider class="my-3"></v-divider>
 
-                      <v-btn depressed rounded text href="#">
-                        <v-icon left style="margin-top: 2px">add</v-icon>
-                        <span>เพิ่มสูตรอาหาร</span>
-                      </v-btn>
+                        <v-btn depressed rounded text href="#">
+                          <v-icon left>add</v-icon>
+                          <span style="vertical-align: middle"
+                            >เพิ่มสูตรอาหาร</span
+                          >
+                        </v-btn>
 
-                      <v-divider class="my-3"></v-divider>
+                        <v-divider class="my-3"></v-divider>
 
-                      <v-btn depressed rounded text href="#">
-                        <v-icon left style="margin-top: 2px">login</v-icon>
-                        <span>ออกจากระบบ</span>
-                      </v-btn>
+                        <v-btn depressed rounded text href="#">
+                          <v-icon left>login</v-icon>
+                          <span style="vertical-align: middle">ออกจากระบบ</span>
+                        </v-btn>
+                      </div>
                     </div>
                   </v-list-item-content>
                 </v-card>
@@ -177,7 +181,7 @@ export default {
   top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgb(0, 0, 0, 0.2);
+  background: rgb(0, 0, 0, 0.1);
   max-width: 1000px;
   max-height: 200px;
   height: 27%;
@@ -186,10 +190,6 @@ export default {
   justify-content: space-between;
   border-radius: 5px;
 }
-
-/* .header-nav .search-field .search-text-field-bar{
-  width: 80%;
-} */
 
 .header-nav-icon .nav-nav-icon {
   margin: 8px;
@@ -212,12 +212,16 @@ export default {
   padding: 10px;
 }
 
-.header-nav-menu .nav-menu .btn-add-receipt {
+.btn-add-recipe v-btn > span {
+  vertical-align: middle;
+}
+
+.header-nav-menu .nav-menu .btn-add-recipe {
   height: 15%;
   margin: 8px 5px;
 }
 
-.header-nav-menu .nav-menu .btn-fav-receipt {
+.header-nav-menu .nav-menu .btn-fav-recipe {
   height: 15%;
   margin: 8px 8px;
 }

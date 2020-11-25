@@ -1,38 +1,37 @@
 <template>
   <div class="home-container">
+    <!-- Header above card box -->
+
     <div class="flex-header">
+      <!-- Suggest topic -->
+
       <div class="header-menu-card-box">
         <div class="header-text">
-          <h1 class="text-menu-suggest">เมนูเเนะนำสำหรับคุณ</h1>
+          <h1 class="text-menu-suggest" style="vertical-align: middle">
+            เมนูเเนะนำสำหรับคุณ
+          </h1>
         </div>
       </div>
+
+      <!-- Tag box -->
+
       <div class="header-menu-tag" style="display: flex">
         <div class="btn-views-all-tag" style="display: flex">
           <h5>ดูทั้งหมด</h5>
           <v-icon>arrow_right_alt</v-icon>
         </div>
 
-        <div
-          class="menu-tag-box"
-          style="
-            background-color: blue;
-            margin-top: 10px;
-            margin-right: 20px;
-            height: 50px;
-            display: flex;
-            position: absolute;
-          "
-        >
+        <div class="menu-tag-box">
           <div class="menu-tag-cover" v-for="tag in tags" :key="tag.tagName">
             <v-chip
               link
               outlined
-              class="ma-2"
-              color="pink"
+              class="ma-3"
+              color="black"
               label
-              text-color="white"
+              text-color="black"
+              large
             >
-              <v-icon left> mdi-label </v-icon>
               {{ tag.tagName }}
             </v-chip>
           </div>
@@ -40,13 +39,10 @@
       </div>
     </div>
 
+    <!-- Card menu -->
+
     <div class="menu-card-box">
-      <v-layout
-        row
-        wrap
-        style="background-color: blue"
-        class="menu-card-cober-each-card"
-      >
+      <v-layout row wrap class="menu-card-cober-each-card">
         <v-flex
           xs12
           sm6
@@ -56,7 +52,14 @@
           :key="recipe.Name"
           class="menu-card-each-card"
         >
-          <v-card :loading="loading" class="mx-auto" max-width="374">
+          <!-- Card -->
+
+          <v-card
+            :loading="loading"
+            class="mx-auto"
+            max-width="374"
+            id="card-recipe"
+          >
             <template slot="progress">
               <v-progress-linear
                 color="deep-purple"
@@ -65,17 +68,43 @@
               ></v-progress-linear>
             </template>
 
+            <!-- Img for recipe card -->
+
             <v-img
+              class="card-recipe-img"
               height="250"
-              src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+              src= "../assets/Recipe/beefwell.jpg"
             ></v-img>
 
-            <v-card-title>Cafe Badilico</v-card-title>
+            <div class="btn-fav-recipe">
+              <div>
+                <v-icon class="btn-fav-recipe-icon" style=""
+                  >favorite_border</v-icon
+                >
+              </div>
+            </div>
 
-            <v-card-text>
+            <v-card-title style="font-size: 28px">{{
+              recipe.Name
+            }}</v-card-title>
+
+            <v-card-text class="card-data">
+              <div class="box-card-data">
+                <div class="card-data-cook-time">
+                  <v-icon left>schedule</v-icon>
+                  <span style="vertical-align: middle"
+                    >{{ recipe.time }} ชั่วโมง</span
+                  >
+                </div>
+                <div class="card-data-cook-time" style="margin-left: 15px">
+                  <v-icon left>group</v-icon>
+                  <span style="vertical-align: middle">สำหรับ 2 ที่</span>
+                </div>
+              </div>
+
               <v-row align="center" class="mx-0">
                 <v-rating
-                  :value="4.5"
+                  :value="recipe.rate"
                   color="amber"
                   dense
                   half-increments
@@ -88,8 +117,14 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-btn color="deep-purple lighten-2" text @click="reserve">
-                Reserve
+              <v-btn
+                block
+                dark
+                text
+                @click="reserve"
+                style="background-color: green"
+              >
+                <span>ทำอาหาร</span>
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -97,39 +132,49 @@
       </v-layout>
     </div>
 
-    <div class="btn-see-all-receipt">
-      <v-btn color="success">text</v-btn>
+    <!-- Button All recipe -->
+
+    <div class="wraper-btn-see-all-recipe">
+      <v-btn large color="success" class="btn-see-all-recipe">
+        <span class="all-recipe-text">สูตรอื่นๆ</span>
+      </v-btn>
     </div>
     <div>
       <Pagination />
-    </div>
+  </div>
   </div>
 </template>
 
 <script>
 import Pagination from "./Pagination.vue";
-// import SearchReceipt from "./SearchReceipt.vue";
+// import Searchrecipe from "./SearchRecipe.vue";
 
 export default {
   name: "Home",
 
   components: {
     Pagination,
-    // SearchReceipt,
+    // SearchRecipe,
   },
+
+  pagination () {
+      return {
+        page: 1,
+      }
+    },
 
   data: () => ({
     menus: [
-      { Name: "Beef Welling Ton", Author: "KhaoKrua" },
-      { Name: "Tomyum Kung", Author: "KhaoKrua" },
-      { Name: "Beef Welling Ton", Author: "KhaoKrua" },
-      { Name: "Beef Welling Ton", Author: "KhaoKrua" },
-      { Name: "Tomyum Kung", Author: "KhaoKrua" },
-      { Name: "Beef Welling Ton", Author: "KhaoKrua" },
-      { Name: "Beef Welling Ton", Author: "KhaoKrua" },
-      { Name: "Beef Welling Ton", Author: "KhaoKrua" },
-      { Name: "Beef Welling Ton", Author: "KhaoKrua" },
-      { Name: "Tomyum Kung", Author: "KhaoKrua" },
+      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "2", rate: "1",src: "../assets/Recipe/beefwell.jpg"},
+      { Name: "Tomyum Kung", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
+      { Name: "ข้าวผัดหมูสับ", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
+      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
+      { Name: "Tomyum Kung", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
+      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
+      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
+      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
+      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
+      { Name: "Tomyum Kung", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
     ],
     tags: [
       { tagName: "Drink" },
@@ -152,21 +197,62 @@ export default {
   font-family: monospace;
 }
 
-.home-container{
+.menu-tag-box {
+  margin-top: 10px;
+  margin-right: 20px;
+  height: 50px;
+  display: flex;
+  position: absolute;
+}
+.home-container {
   width: 90%;
   margin-left: 5rem;
   position: relative;
 }
 
+.home-container .wraper-btn-see-all-recipe {
+  height: 100px;
+  padding: 50px;
+  background-color: white;
+  position: relative;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.wraper-btn-see-all-recipe .btn-see-all-recipe {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+}
+
 .flex-header {
   display: flex;
   justify-content: space-between;
-  background-color: pink;
 }
 
 .menu-card-cober-each-card .menu-card-each-card {
-  background-color: yellow;
   padding: 5px 5px 5px 5px;
+}
+
+.menu-card-each-card .btn-fav-recipe .btn-fav-recipe-icon {
+  position: absolute;
+  left: 80%;
+  bottom: 38%;
+  background: red;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 15px;
+  border-radius: 50%;
+}
+
+.menu-card-each-card
+  .btn-fav-recipe:hover
+  + .menu-card-each-card
+  .btn-fav-recipe {
+  display: block;
 }
 
 .header-menu-tag {
@@ -175,11 +261,10 @@ export default {
   border-radius: 10px;
   width: 62%;
   max-height: 120px;
-  background-color: grey;
+  background-color: white;
   position: relative;
   margin-top: 63px;
   margin-right: 63px;
-  border: black solid;
 }
 
 .header-menu-tag .btn-views-all-tag {
@@ -189,12 +274,11 @@ export default {
   right: 20%;
   width: 100px;
   margin: 5px auto;
-  background-color: yellow;
   justify-content: center;
 }
 
 .header-menu-card-box {
-  background-color: red;
+  background-color: white;
   height: 150px;
   margin-top: 50px;
   margin-left: 20px;
@@ -210,12 +294,21 @@ export default {
   text-align: center;
 }
 
+#card-recipe .card-recipe-img {
+  background-size: 150%;
+}
+
 .menu-card-box {
-  background-color: orange;
+  background-color: white;
   margin-left: 20px;
   margin-right: 20px;
   padding: 20px;
-  border-radius: 0px 0px 10px 10px;
+}
+
+.card-data .box-card-data {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px auto;
 }
 
 .v-card--reveal {
