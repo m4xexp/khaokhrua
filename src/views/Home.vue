@@ -15,10 +15,13 @@
 
       <!-- Tag box -->
 
-      <div class="header-menu-tag" style="display: flex">
-        <div class="btn-views-all-tag" style="display: flex">
-          <h5>ดูทั้งหมด</h5>
-          <v-icon>arrow_right_alt</v-icon>
+      <div class="header-menu-tag" style="display: flex; position: relative">
+        <div
+          class="btn-views-all-tag"
+          style="padding: 5px; width: 100px; display: flex; margin: 0"
+        >
+          <h5 style="width: 50px; margin-top: 3px">ดูทั้งหมด</h5>
+          <v-icon style="width: 25px">arrow_right_alt</v-icon>
         </div>
 
         <div class="menu-tag-box">
@@ -27,9 +30,9 @@
               link
               outlined
               class="ma-3"
-              color="black"
+              color="red darken-1"
               label
-              text-color="black"
+              text-color="red darken-1"
               large
             >
               {{ tag.tagName }}
@@ -57,7 +60,7 @@
           <v-card
             :loading="loading"
             class="mx-auto"
-            max-width="374"
+            max-width="400"
             id="card-recipe"
           >
             <template slot="progress">
@@ -72,8 +75,110 @@
 
             <v-img
               class="card-recipe-img"
-              height="250"
-              src= "../assets/Recipe/beefwell.jpg"
+              height="200"
+              src="../assets/Recipe/beefwell.jpg"
+            ></v-img>
+
+            <div class="btn-fav-recipe">
+              <div>
+                <v-icon class="btn-fav-recipe-icon" style=""
+                  >favorite_border</v-icon
+                >
+              </div>
+            </div>
+
+            <v-card-title style="font-size: 28px">{{
+              recipe.Name
+            }}</v-card-title>
+
+            <v-card-text class="card-data">
+              <div class="box-card-data">
+                <div class="card-data-cook-time">
+                  <v-icon left>schedule</v-icon>
+                  <span style="vertical-align: middle"
+                    >{{ recipe.time }} ชั่วโมง</span
+                  >
+                </div>
+                <div class="card-data-cook-time" style="margin-left: 15px">
+                  <v-icon left>group</v-icon>
+                  <span style="vertical-align: middle">สำหรับ 2 ที่</span>
+                </div>
+              </div>
+
+              <v-row align="center" class="mx-0">
+                <v-rating
+                  :value="recipe.rate"
+                  color="amber"
+                  dense
+                  half-increments
+                  readonly
+                  size="14"
+                ></v-rating>
+
+                <div class="grey--text ml-4">4.5 (413)</div>
+              </v-row>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-btn
+                block
+                dark
+                text
+                @click="reserve"
+                style="background-color: #FF7043"
+              >
+                <span>ทำอาหาร</span>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </div>
+
+    <!-- Button All recipe -->
+
+    <div class="wraper-btn-see-all-recipe">
+      <v-btn large color="success" class="btn-see-all-recipe">
+        <span class="all-recipe-text">สูตรอื่นๆ</span>
+      </v-btn>
+    </div>
+
+
+    <!-- Menu of the day card -->
+
+    <div class="menu-card-box-2">
+      <v-layout row wrap class="menu-card-cober-each-card">
+        <v-flex
+          xs12
+          sm6
+          md4
+          lg3
+          v-for="recipe in menus"
+          :key="recipe.Name"
+          class="menu-card-each-card"
+        >
+          <!-- Card -->
+
+          <v-card
+            :loading="loading"
+            class="mx-auto"
+            max-width="400"
+            id="card-recipe"
+          >
+            <template slot="progress">
+              <v-progress-linear
+                color="deep-purple"
+                height="10"
+                indeterminate
+              ></v-progress-linear>
+            </template>
+
+            <!-- Img for recipe card -->
+
+            <v-img
+              class="card-recipe-img"
+              height="200"
+              src="../assets/Recipe/beefwell.jpg"
             ></v-img>
 
             <div class="btn-fav-recipe">
@@ -132,16 +237,9 @@
       </v-layout>
     </div>
 
-    <!-- Button All recipe -->
-
-    <div class="wraper-btn-see-all-recipe">
-      <v-btn large color="success" class="btn-see-all-recipe">
-        <span class="all-recipe-text">สูตรอื่นๆ</span>
-      </v-btn>
-    </div>
     <div>
       <Pagination />
-  </div>
+    </div>
   </div>
 </template>
 
@@ -157,24 +255,72 @@ export default {
     // SearchRecipe,
   },
 
-  pagination () {
-      return {
-        page: 1,
-      }
-    },
+  pagination() {
+    return {
+      page: 1,
+    };
+  },
 
   data: () => ({
+    loading: false,
+    selection: 1,
     menus: [
-      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "2", rate: "1",src: "../assets/Recipe/beefwell.jpg"},
-      { Name: "Tomyum Kung", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
-      { Name: "ข้าวผัดหมูสับ", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
-      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
-      { Name: "Tomyum Kung", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
-      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
-      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
-      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
-      { Name: "Beef Welling Ton", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
-      { Name: "Tomyum Kung", Author: "KhaoKrua", time: "1", rate: "4.7",src: "../assets/Recipe/beefwell.jpg" },
+      {
+        Name: "Beef Welling Ton",
+        Author: "KhaoKrua",
+        time: "2",
+        rate: "1",
+        src: "../assets/Recipe/beefwell.jpg",
+      },
+      {
+        Name: "Tomyum Kung",
+        Author: "KhaoKrua",
+        time: "1",
+        rate: "4.7",
+        src: "../assets/Recipe/beefwell.jpg",
+      },
+      {
+        Name: "ข้าวผัดหมูสับ",
+        Author: "KhaoKrua",
+        time: "1",
+        rate: "4.7",
+        src: "../assets/Recipe/beefwell.jpg",
+      },
+      {
+        Name: "Beef Welling Ton",
+        Author: "KhaoKrua",
+        time: "1",
+        rate: "4.7",
+        src: "../assets/Recipe/beefwell.jpg",
+      },
+      {
+        Name: "Tomyum Kung",
+        Author: "KhaoKrua",
+        time: "1",
+        rate: "4.7",
+        src: "../assets/Recipe/beefwell.jpg",
+      },
+      {
+        Name: "Beef Welling Ton",
+        Author: "KhaoKrua",
+        time: "1",
+        rate: "4.7",
+        src: "../assets/Recipe/beefwell.jpg",
+      },
+      {
+        Name: "Beef Welling Ton",
+        Author: "KhaoKrua",
+        time: "1",
+        rate: "4.7",
+        src: "../assets/Recipe/beefwell.jpg",
+      },
+      {
+        Name: "Beef Welling Ton",
+        Author: "KhaoKrua",
+        time: "1",
+        rate: "4.7",
+        src: "../assets/Recipe/beefwell.jpg",
+      },
     ],
     tags: [
       { tagName: "Drink" },
@@ -185,6 +331,13 @@ export default {
       { tagName: "Cheese" },
       { tagName: "Cream" },
     ],
+    methods: {
+      reserve () {
+        this.loading = true
+
+        setTimeout(() => (this.loading = false), 2000)
+      },
+    },
   }),
 };
 </script>
@@ -194,7 +347,12 @@ export default {
   margin: 0;
   padding: 0;
   outline: none;
-  font-family: monospace;
+}
+
+.home-container {
+  margin: 5px auto;
+  width: 90%;
+  position: relative;
 }
 
 .menu-tag-box {
@@ -203,11 +361,6 @@ export default {
   height: 50px;
   display: flex;
   position: absolute;
-}
-.home-container {
-  width: 90%;
-  margin-left: 5rem;
-  position: relative;
 }
 
 .home-container .wraper-btn-see-all-recipe {
@@ -230,16 +383,18 @@ export default {
 .flex-header {
   display: flex;
   justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .menu-card-cober-each-card .menu-card-each-card {
-  padding: 5px 5px 5px 5px;
+  padding: 15px 15px 15px 15px;
 }
 
 .menu-card-each-card .btn-fav-recipe .btn-fav-recipe-icon {
   position: absolute;
   left: 80%;
-  bottom: 38%;
+  bottom: 43%;
   background: red;
   color: white;
   font-size: 1.2em;
@@ -263,8 +418,8 @@ export default {
   max-height: 120px;
   background-color: white;
   position: relative;
+  margin: auto;
   margin-top: 63px;
-  margin-right: 63px;
 }
 
 .header-menu-tag .btn-views-all-tag {
@@ -281,8 +436,6 @@ export default {
   background-color: white;
   height: 150px;
   margin-top: 50px;
-  margin-left: 20px;
-  margin-right: 20px;
   padding: 20px;
   border-radius: 10px 10px 0px 0px;
   width: 30%;
@@ -294,8 +447,18 @@ export default {
   text-align: center;
 }
 
+#card-recipe {
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
 #card-recipe .card-recipe-img {
   background-size: 150%;
+}
+
+#card-recipe:hover {
+  transform: scale(1.05);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
 }
 
 .menu-card-box {
@@ -303,6 +466,16 @@ export default {
   margin-left: 20px;
   margin-right: 20px;
   padding: 20px;
+  border-radius: 0px 10px 0px 0px;
+}
+
+.menu-card-box-2 {
+  background-color: white;
+  margin-top: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px;
+  border-radius: 0px 10px 0px 0px;
 }
 
 .card-data .box-card-data {
@@ -311,14 +484,7 @@ export default {
   margin: 10px auto;
 }
 
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.5;
-  position: absolute;
-  width: 100%;
-}
+
 </style>
 
 

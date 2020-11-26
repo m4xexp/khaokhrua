@@ -16,7 +16,7 @@
         <v-spacer></v-spacer>
 
         <v-btn color="white" text rounded class="my-2" v-on:click="n+1">Back to top</v-btn>
-        <v-col class="grey darken-4 text-center white--text" cols="12">
+        <v-col class="grey darken-4 text-center white--text" cols="12" style="margin: 15px auto">
           {{ new Date().getFullYear() }} — <strong>Khao Krua</strong>
         </v-col>
       </v-row>

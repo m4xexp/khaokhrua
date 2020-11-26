@@ -6,14 +6,22 @@
       dark
       app
       src="../assets/cover_khaokrua.jpg"
-      height="280px"
+      height="360px"
+      prominent
+      fixed
+      shrink-on-scroll
     >
-      <div class="sub-header-nav">
+      <!-- <div class="sub-header-nav"> -->
+        <!-- Nav Icon src="../assets/cover_khaokrua.jpg"-->
+
         <div class="header-nav-icon">
           <div class="nav-nav-icon">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
           </div>
         </div>
+
+        <!-- Logo KhaoKrua -->
+
         <div class="header-nav-logo">
           <div class="nav-logo">
             <v-img
@@ -39,91 +47,103 @@
               solo
             ></v-text-field>
           </div>
-          <div class="btn-search-icon">
-            <v-btn large color="red darken-1">
-              <v-icon large color="white" alt="searchRecipt">search</v-icon>
+          <div class="btn-search-icon" style="position: relative">
+            <v-btn
+              large
+              height="50px"
+              color="red darken-1"
+              style="margin: 0 auto; left: 0px; bottom: 1px"
+            >
+              <v-icon large alt="searchRecipt">search</v-icon>
             </v-btn>
           </div>
         </div>
+      <!-- </div> -->
 
-        <!-- Nav menu -->
+      <!-- Nav menu -->
 
-        <div class="header-nav-menu">
-          <div class="nav-menu">
-            <div class="btn-add-recipe">
-              <v-btn left text>
-                <v-icon>add</v-icon>
-                <span>เพิ่มสูตรอาหาร</span>
+      <ul class="nav-menu">
+        <li class="btn-add-recipe">
+          <v-btn left text>
+            <v-icon>add</v-icon>
+            <span>เพิ่มสูตรอาหาร</span>
+          </v-btn>
+        </li>
+
+        <li class="btn-fav-recipe">
+          <v-btn left text>
+            <v-icon left>favorite</v-icon>
+            <span>เมนูโปรด</span>
+          </v-btn>
+        </li>
+
+        <!-- Profile Menu -->
+
+        <li class="btn-profile">
+          <v-menu bottom min-width="200px" rounded offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                icon
+                x-large
+                v-bind="attrs"
+                v-on="on"
+                max-width="32px"
+                max-height="32px"
+              >
+                <v-avatar>
+                  <img
+                    src="../assets/Profile/miew.jpg"
+                    alt="miew"
+                    style="max-width: 32px; max-height: 32px"
+                  />
+                </v-avatar>
               </v-btn>
-            </div>
-            <div class="btn-fav-recipe">
-              <v-btn left text>
-                <v-icon left>favorite</v-icon>
-                <span>เมนูโปรด</span>
-              </v-btn>
-            </div>
-
-            <!-- Profile Menu -->
-
-            <div class="btn-profile">
-              <v-menu bottom min-width="200px" rounded offset-y>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn icon x-large v-bind="attrs" v-on="on">
+            </template>
+            <v-card>
+              <v-list-item-content>
+                <div class="mx-auto text-center">
+                  <!-- Profile button -->
+                  <v-btn x-large icon>
                     <v-avatar>
-                      <img src="../assets/Profile/miew.jpg" alt="miew" />
+                      <img src="../assets/Profile/miew.jpg" alt="nong" />
                     </v-avatar>
                   </v-btn>
-                </template>
-                <v-card>
-                  <v-list-item-content>
-                    <div class="mx-auto text-center">
-                      <!-- Profile button -->
-                      <v-btn x-large icon>
-                        <v-avatar>
-                          <img src="../assets/Profile/miew.jpg" alt="nong" />
-                        </v-avatar>
-                      </v-btn>
-                      <div class="prfile-title" style="margin: 10px">
-                        <h4 class="profile-title-name">{{ user.fullName }}</h4>
-                        <p class="caption mt-1" id="profile-title-email">
-                          {{ user.email }}
-                        </p>
-                      </div>
+                  <div class="prfile-title" style="margin: 10px">
+                    <h4 class="profile-title-name">{{ user.fullName }}</h4>
+                    <p class="caption mt-1" id="profile-title-email">
+                      {{ user.email }}
+                    </p>
+                  </div>
 
-                      <div class="profile-items">
-                        <v-divider class="my-3"></v-divider>
-                        <v-btn depressed rounded text href="#">
-                          <v-icon left>account_circle</v-icon>
-                          <span style="vertical-align: middle"
-                            >แก้ไขโปรไฟล์</span
-                          >
-                        </v-btn>
+                  <div class="profile-items">
+                    <v-divider class="my-3"></v-divider>
+                    <v-btn depressed rounded text href="#">
+                      <v-icon left>account_circle</v-icon>
+                      <span>แก้ไขโปรไฟล์</span>
+                    </v-btn>
 
-                        <v-divider class="my-3"></v-divider>
+                    <v-divider class="my-3"></v-divider>
 
-                        <v-btn depressed rounded text href="#">
-                          <v-icon left>add</v-icon>
-                          <span style="vertical-align: middle"
-                            >เพิ่มสูตรอาหาร</span
-                          >
-                        </v-btn>
+                    <v-btn depressed rounded text href="#">
+                      <v-icon left>add</v-icon>
+                      <span>เพิ่มสูตรอาหาร</span>
+                    </v-btn>
 
-                        <v-divider class="my-3"></v-divider>
+                    <v-divider class="my-3"></v-divider>
 
-                        <v-btn depressed rounded text href="#">
-                          <v-icon left>login</v-icon>
-                          <span style="vertical-align: middle">ออกจากระบบ</span>
-                        </v-btn>
-                      </div>
-                    </div>
-                  </v-list-item-content>
-                </v-card>
-              </v-menu>
-            </div>
-          </div>
-        </div>
-      </div>
+                    <v-btn depressed rounded text href="#">
+                      <v-icon left>login</v-icon>
+                      <span>ออกจากระบบ</span>
+                    </v-btn>
+                  </div>
+                </div>
+              </v-list-item-content>
+            </v-card>
+          </v-menu>
+        </li>
+      </ul>
     </v-app-bar>
+
     <v-navigation-drawer v-model="drawer" absolute app temporary>
       <v-list-item>
         <v-list-item-content>
@@ -167,12 +187,33 @@ export default {
 };
 </script>
 
+
+
 <style scrope>
-.header-nav .sub-header-nav {
-  display: grid;
-  grid-template-columns: 30% 40% 30%;
-  width: 100vw;
-  height: 280px;
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-nav-logo {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  width: 30%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header-nav-logo .nav-logo {
+  margin: 50px;
 }
 
 .header-nav .search-field {
@@ -183,46 +224,42 @@ export default {
   transform: translate(-50%, -50%);
   background: rgb(0, 0, 0, 0.1);
   max-width: 1000px;
-  max-height: 200px;
-  height: 27%;
+  height: 80px;
   width: 47.5%;
   padding: 15px;
   justify-content: space-between;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
-.header-nav-icon .nav-nav-icon {
-  margin: 8px;
-}
-
-.header-nav-logo {
-  display: flex;
-  justify-content: center;
-}
-
-.header-nav-logo .nav-logo {
-  margin: 50px;
-}
-
-.header-nav-menu .nav-menu {
+.header-nav .nav-menu {
+  float: right;
   margin: 0 auto;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px;
+  margin-right: 0;
+  /* background-color: yellow; */
 }
 
-.btn-add-recipe v-btn > span {
+.header-nav ul li {
+  margin: 3px 5px;
+  display: inline-block;
+  /* background-color: red; */
+}
+
+span {
   vertical-align: middle;
 }
 
 .header-nav-menu .nav-menu .btn-add-recipe {
+  /* background-color: blue; */
   height: 15%;
-  margin: 8px 5px;
 }
 
 .header-nav-menu .nav-menu .btn-fav-recipe {
+  /* background-color: blue; */
   height: 15%;
-  margin: 8px 8px;
+}
+
+.header-nav-menu .nav-menu .btn-profile {
+  margin: 0;
+  /* background-color: black; */
 }
 </style>
